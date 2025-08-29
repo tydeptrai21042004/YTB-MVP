@@ -7,4 +7,6 @@ const historySchema = new Schema({
   viewedAt: { type: Date, default: Date.now }
 });
 
+historySchema.index({ user: 1, video: 1, viewedAt: -1 }); // ← minimal: relation index
+
 module.exports = model('History', historySchema);

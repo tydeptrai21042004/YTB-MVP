@@ -8,4 +8,10 @@ const ratingSchema = new Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+ratingSchema.index({ video: 1 }); // ← minimal: common query
+ratingSchema.index(                // ← minimal: unique per (user, video)
+  { video: 1, user: 1 },
+  { unique: true, partialFilterExpression: { user: { $type: 'objectId' } } }
+);
+
 module.exports = model('Rating', ratingSchema);

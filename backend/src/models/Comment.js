@@ -9,4 +9,6 @@ const commentSchema = new Schema({
   createdAt: { type: Date, default: Date.now }
 });
 
+commentSchema.index({ video: 1, createdAt: -1 }); // ← minimal: relation index
+
 module.exports = model('Comment', commentSchema);
